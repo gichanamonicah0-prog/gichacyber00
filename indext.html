@@ -1,0 +1,1528 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>CyberTech Café | Digital Solutions & Portfolio</title>
+  <meta name="description" content="Professional cyber café, digital services and technology solutions.">
+
+  <style>
+    /* =========================
+       RESET & GLOBAL STYLES
+    ========================== */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      scroll-behavior: smooth;
+    }
+
+    :root {
+      --bg: #050816;
+      --bg2: #0b1026;
+      --card: rgba(15, 23, 50, 0.65);
+      --cyan: #00eaff;
+      --blue: #2563ff;
+      --purple: #9b5cff;
+      --pink: #ff2bd6;
+      --green: #00ffa3;
+      --white: #ffffff;
+      --text: #c9d3e7;
+      --muted: #8490aa;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background: var(--bg);
+      color: var(--white);
+      overflow-x: hidden;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .container {
+      width: min(1150px, 92%);
+      margin: auto;
+    }
+
+    /* =========================
+       ANIMATED BACKGROUND
+    ========================== */
+
+    .background {
+      position: fixed;
+      inset: 0;
+      z-index: -10;
+      overflow: hidden;
+      background:
+        radial-gradient(circle at 15% 20%, rgba(0, 234, 255, .15), transparent 25%),
+        radial-gradient(circle at 80% 30%, rgba(155, 92, 255, .18), transparent 28%),
+        radial-gradient(circle at 50% 90%, rgba(255, 43, 214, .10), transparent 30%),
+        #050816;
+    }
+
+    .grid {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(0,234,255,.06) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,234,255,.06) 1px, transparent 1px);
+      background-size: 55px 55px;
+      transform: perspective(500px) rotateX(60deg) scale(1.5);
+      transform-origin: center bottom;
+      animation: gridMove 12s linear infinite;
+      opacity: .5;
+    }
+
+    @keyframes gridMove {
+      from {
+        transform: perspective(500px) rotateX(60deg)
+                   scale(1.5) translateY(0);
+      }
+      to {
+        transform: perspective(500px) rotateX(60deg)
+                   scale(1.5) translateY(55px);
+      }
+    }
+
+    .orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(2px);
+      opacity: .5;
+      animation: float 9s ease-in-out infinite;
+    }
+
+    .orb.one {
+      width: 250px;
+      height: 250px;
+      background: #006eff;
+      top: 15%;
+      left: -80px;
+      box-shadow: 0 0 100px #006eff;
+    }
+
+    .orb.two {
+      width: 300px;
+      height: 300px;
+      background: #a000ff;
+      right: -100px;
+      top: 45%;
+      box-shadow: 0 0 120px #a000ff;
+      animation-delay: -3s;
+    }
+
+    .orb.three {
+      width: 180px;
+      height: 180px;
+      background: #00ffd0;
+      bottom: -50px;
+      left: 45%;
+      box-shadow: 0 0 100px #00ffd0;
+      animation-delay: -6s;
+    }
+
+    @keyframes float {
+      0%, 100% {
+        transform: translate(0, 0) scale(1);
+      }
+      50% {
+        transform: translate(50px, -40px) scale(1.1);
+      }
+    }
+
+    #particles {
+      position: absolute;
+      inset: 0;
+    }
+
+    /* =========================
+       NAVBAR
+    ========================== */
+
+    header {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 1000;
+      padding: 18px 0;
+      transition: .3s;
+    }
+
+    header.scrolled {
+      background: rgba(5, 8, 22, .85);
+      backdrop-filter: blur(15px);
+      box-shadow: 0 5px 30px rgba(0,0,0,.3);
+    }
+
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-size: 23px;
+      font-weight: 900;
+      letter-spacing: 1px;
+    }
+
+    .logo span {
+      color: var(--cyan);
+      text-shadow: 0 0 15px var(--cyan);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 28px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--text);
+      font-size: 14px;
+      transition: .3s;
+    }
+
+    .nav-links a:hover {
+      color: var(--cyan);
+      text-shadow: 0 0 12px var(--cyan);
+    }
+
+    .menu-btn {
+      display: none;
+      font-size: 27px;
+      cursor: pointer;
+    }
+
+    /* =========================
+       HERO
+    ========================== */
+
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding-top: 100px;
+    }
+
+    .hero-content {
+      max-width: 750px;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 9px 18px;
+      border: 1px solid rgba(0,234,255,.5);
+      background: rgba(0,234,255,.08);
+      border-radius: 30px;
+      color: var(--cyan);
+      margin-bottom: 25px;
+      box-shadow: 0 0 20px rgba(0,234,255,.1);
+    }
+
+    .hero h1 {
+      font-size: clamp(45px, 8vw, 90px);
+      line-height: .95;
+      margin-bottom: 25px;
+    }
+
+    .gradient-text {
+      background: linear-gradient(
+        90deg,
+        var(--cyan),
+        var(--blue),
+        var(--purple),
+        var(--pink)
+      );
+      background-size: 300%;
+      -webkit-background-clip: text;
+      color: transparent;
+      animation: gradient 6s ease infinite;
+    }
+
+    @keyframes gradient {
+      0%,100% { background-position: 0%; }
+      50% { background-position: 100%; }
+    }
+
+    .hero p {
+      max-width: 650px;
+      color: var(--text);
+      font-size: 18px;
+      line-height: 1.8;
+      margin-bottom: 35px;
+    }
+
+    .buttons {
+      display: flex;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      padding: 14px 25px;
+      border-radius: 30px;
+      font-weight: bold;
+      border: 1px solid var(--cyan);
+      transition: .3s;
+    }
+
+    .btn.primary {
+      background: linear-gradient(90deg, var(--cyan), var(--blue));
+      color: #00111a;
+      box-shadow: 0 0 25px rgba(0,234,255,.35);
+    }
+
+    .btn.secondary {
+      background: rgba(255,255,255,.04);
+      color: white;
+    }
+
+    .btn:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 0 30px rgba(0,234,255,.5);
+    }
+
+    /* =========================
+       SECTIONS
+    ========================== */
+
+    section {
+      padding: 100px 0;
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 55px;
+    }
+
+    .section-title span {
+      color: var(--cyan);
+      text-transform: uppercase;
+      font-size: 13px;
+      letter-spacing: 3px;
+    }
+
+    .section-title h2 {
+      font-size: 42px;
+      margin-top: 10px;
+    }
+
+    .section-title p {
+      color: var(--muted);
+      margin-top: 15px;
+    }
+
+    /* =========================
+       GLASS CARDS
+    ========================== */
+
+    .glass {
+      background: var(--card);
+      border: 1px solid rgba(255,255,255,.08);
+      backdrop-filter: blur(15px);
+      border-radius: 20px;
+      box-shadow: 0 20px 60px rgba(0,0,0,.25);
+    }
+
+    /* =========================
+       ABOUT
+    ========================== */
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.2fr;
+      gap: 45px;
+      align-items: center;
+    }
+
+    .profile {
+      min-height: 400px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+    }
+
+    .profile-circle {
+      width: 260px;
+      height: 260px;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 75px;
+      background: linear-gradient(135deg, #111b45, #101024);
+      border: 2px solid var(--cyan);
+      box-shadow:
+        0 0 30px rgba(0,234,255,.3),
+        inset 0 0 40px rgba(155,92,255,.2);
+    }
+
+    .about-text h3 {
+      font-size: 30px;
+      margin-bottom: 20px;
+    }
+
+    .about-text p {
+      color: var(--text);
+      line-height: 1.8;
+      margin-bottom: 20px;
+    }
+
+    /* =========================
+       STATS
+    ========================== */
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 18px;
+      margin-top: 40px;
+    }
+
+    .stat {
+      text-align: center;
+      padding: 25px 10px;
+    }
+
+    .stat h3 {
+      font-size: 35px;
+      color: var(--cyan);
+    }
+
+    .stat p {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    /* =========================
+       SERVICES
+    ========================== */
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+    }
+
+    .service {
+      padding: 28px 20px;
+      transition: .4s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .service:hover {
+      transform: translateY(-10px);
+      border-color: var(--cyan);
+      box-shadow: 0 15px 45px rgba(0,234,255,.12);
+    }
+
+    .service-icon {
+      font-size: 38px;
+      margin-bottom: 18px;
+    }
+
+    .service h3 {
+      margin-bottom: 10px;
+    }
+
+    .service p {
+      color: var(--muted);
+      line-height: 1.6;
+      font-size: 14px;
+    }
+
+    /* =========================
+       PORTFOLIO
+    ========================== */
+
+    .filters {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 35px;
+    }
+
+    .filter {
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.04);
+      color: white;
+      padding: 10px 18px;
+      border-radius: 25px;
+      cursor: pointer;
+      transition: .3s;
+    }
+
+    .filter.active,
+    .filter:hover {
+      background: var(--cyan);
+      color: #00111a;
+    }
+
+    .projects {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 22px;
+    }
+
+    .project {
+      overflow: hidden;
+      transition: .4s;
+    }
+
+    .project:hover {
+      transform: translateY(-8px);
+      border-color: var(--purple);
+      box-shadow: 0 15px 45px rgba(155,92,255,.18);
+    }
+
+    .project-image {
+      height: 210px;
+      background:
+        linear-gradient(135deg, rgba(0,234,255,.3), rgba(155,92,255,.3)),
+        #10162e;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 55px;
+    }
+
+    .project-info {
+      padding: 22px;
+    }
+
+    .project-info h3 {
+      margin-bottom: 8px;
+    }
+
+    .project-info p {
+      color: var(--muted);
+      line-height: 1.6;
+      font-size: 14px;
+      margin-bottom: 15px;
+    }
+
+    .tag {
+      display: inline-block;
+      color: var(--cyan);
+      font-size: 12px;
+      margin-right: 8px;
+    }
+
+    /* =========================
+       SKILLS
+    ========================== */
+
+    .skills {
+      max-width: 800px;
+      margin: auto;
+    }
+
+    .skill {
+      margin-bottom: 25px;
+    }
+
+    .skill-head {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 8px;
+    }
+
+    .skill-head span:last-child {
+      color: var(--cyan);
+    }
+
+    .bar {
+      height: 9px;
+      background: #141a31;
+      border-radius: 20px;
+      overflow: hidden;
+    }
+
+    .bar span {
+      display: block;
+      height: 100%;
+      width: 0;
+      border-radius: inherit;
+      background: linear-gradient(90deg, var(--cyan), var(--purple));
+      box-shadow: 0 0 15px var(--cyan);
+      transition: width 1.5s ease;
+    }
+
+    /* =========================
+       CONTACT
+    ========================== */
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 25px;
+    }
+
+    .contact-info,
+    .contact-form {
+      padding: 35px;
+    }
+
+    .contact-item {
+      display: flex;
+      gap: 15px;
+      margin: 25px 0;
+      color: var(--text);
+    }
+
+    .contact-item .icon {
+      font-size: 25px;
+      color: var(--cyan);
+    }
+
+    input,
+    textarea {
+      width: 100%;
+      background: rgba(255,255,255,.04);
+      border: 1px solid rgba(255,255,255,.1);
+      color: white;
+      padding: 15px;
+      border-radius: 10px;
+      outline: none;
+      margin-bottom: 15px;
+    }
+
+    input:focus,
+    textarea:focus {
+      border-color: var(--cyan);
+      box-shadow: 0 0 15px rgba(0,234,255,.1);
+    }
+
+    textarea {
+      height: 140px;
+      resize: vertical;
+    }
+
+    /* =========================
+       WHATSAPP
+    ========================== */
+
+    .whatsapp {
+      position: fixed;
+      right: 22px;
+      bottom: 22px;
+      width: 58px;
+      height: 58px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #25d366;
+      color: white;
+      font-size: 28px;
+      z-index: 999;
+      box-shadow: 0 0 25px rgba(37,211,102,.5);
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%,100% { box-shadow: 0 0 20px rgba(37,211,102,.4); }
+      50% { box-shadow: 0 0 40px rgba(37,211,102,.8); }
+    }
+
+    /* =========================
+       FOOTER
+    ========================== */
+
+    footer {
+      padding: 50px 0;
+      border-top: 1px solid rgba(255,255,255,.08);
+      text-align: center;
+    }
+
+    footer p {
+      color: var(--muted);
+      margin-top: 10px;
+    }
+
+    /* =========================
+       RESPONSIVE
+    ========================== */
+
+    @media(max-width: 900px) {
+      .cards {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .projects {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .about-grid,
+      .contact-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media(max-width: 650px) {
+
+      .nav-links {
+        position: absolute;
+        top: 75px;
+        left: 4%;
+        right: 4%;
+        display: none;
+        flex-direction: column;
+        background: rgba(5,8,22,.95);
+        backdrop-filter: blur(20px);
+        padding: 25px;
+        border-radius: 15px;
+        border: 1px solid rgba(0,234,255,.15);
+      }
+
+      .nav-links.active {
+        display: flex;
+      }
+
+      .menu-btn {
+        display: block;
+      }
+
+      .cards,
+      .projects,
+      .stats {
+        grid-template-columns: 1fr;
+      }
+
+      .hero h1 {
+        font-size: 50px;
+      }
+
+      .section-title h2 {
+        font-size: 32px;
+      }
+
+      section {
+        padding: 75px 0;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- =========================
+       ANIMATED BACKGROUND
+  ========================== -->
+
+  <div class="background">
+    <div id="particles"></div>
+    <div class="grid"></div>
+    <div class="orb one"></div>
+    <div class="orb two"></div>
+    <div class="orb three"></div>
+  </div>
+
+  <!-- =========================
+       NAVIGATION
+  ========================== -->
+
+  <header id="header">
+    <div class="container">
+      <nav>
+
+        <!-- CHANGE BUSINESS NAME HERE -->
+        <a href="#home" class="logo">
+          <span>gicha</span>cyber
+        </a>
+
+        <ul class="nav-links" id="navLinks">
+          <li><a href="#home">Home</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#services">Services</a></li>
+          <li><a href="#projects">Projects</a></li>
+          <li><a href="#skills">Skills</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+
+        <div class="menu-btn" id="menuBtn">☰</div>
+
+      </nav>
+    </div>
+  </header>
+
+  <!-- =========================
+       HERO
+  ========================== -->
+
+  <section class="hero" id="home">
+    <div class="container">
+
+      <div class="hero-content">
+
+        <div class="badge">
+          ⚡ Digital Solutions & Cyber Café
+        </div>
+
+        <h1>
+          Welcome To
+          <span class="gradient-text">My Digital World.</span>
+        </h1>
+
+        <p>
+          Professional cyber café services, creative digital solutions,
+          website development, graphic design and technology services —
+          all in one place.
+        </p>
+
+        <div class="buttons">
+          <a href="#projects" class="btn primary">
+            View My Work
+          </a>
+
+          <a href="#contact" class="btn secondary">
+            Contact Me
+          </a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================
+       ABOUT
+  ========================== -->
+
+  <section id="about">
+
+    <div class="container">
+
+      <div class="section-title">
+        <span>Who I Am</span>
+        <h2>About Me</h2>
+        <p>Technology, creativity and digital solutions.</p>
+      </div>
+
+      <div class="about-grid">
+
+        <div class="profile glass">
+          <div class="profile-circle">
+            👨‍💻
+          </div>
+        </div>
+
+        <div class="about-text">
+
+          <h3>Welcome to my Cyber Café</h3>
+
+          <p>
+            I provide reliable cyber café and digital services while
+            creating modern technology solutions for individuals,
+            students and businesses.
+          </p>
+
+          <p>
+            My goal is to combine professional customer service with
+            technology and creativity to help people accomplish their
+            digital needs quickly and efficiently.
+          </p>
+
+          <div class="stats">
+
+            <div class="stat glass">
+              <h3 data-count="500">0</h3>
+              <p>Customers</p>
+            </div>
+
+            <div class="stat glass">
+              <h3 data-count="100">0</h3>
+              <p>Projects</p>
+            </div>
+
+            <div class="stat glass">
+              <h3 data-count="5">0</h3>
+              <p>Years Experience</p>
+            </div>
+
+            <div class="stat glass">
+              <h3 data-count="20">0</h3>
+              <p>Services</p>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- =========================
+       SERVICES
+  ========================== -->
+
+  <section id="services">
+
+    <div class="container">
+
+      <div class="section-title">
+        <span>What I Offer</span>
+        <h2>My Services</h2>
+        <p>Professional digital and cyber café services.</p>
+      </div>
+
+      <div class="cards">
+
+        <div class="service glass">
+          <div class="service-icon">🖨️</div>
+          <h3>Printing</h3>
+          <p>Fast and quality document printing services.</p>
+        </div>
+
+        <div class="service glass">
+          <div class="service-icon">📄</div>
+          <h3>Photocopy</h3>
+          <p>Reliable photocopying for documents and files.</p>
+        </div>
+
+        <div class="service glass">
+          <div class="service-icon">📑</div>
+          <h3>Scanning</h3>
+          <p>High-quality document scanning and digital conversion.</p>
+        </div>
+
+        <div class="service glass">
+          <div class="service-icon">⌨️</div>
+          <h3>Typing</h3>
+          <p>Professional typing and document preparation.</p>
+        </div>
+
+        <div class="service glass">
+          <div class="service-icon">📋</div>
+          <h3>CV Design</h3>
+          <p>Modern professional CV and resume creation.</p>
+        </div>
+
+        <div class="service glass">
+          <div class="service-icon">🌐</div>
+          <h3>Web Development</h3>
+          <p>Modern websites for individuals and businesses.</p>
+        </div>
+
+        <div class="service glass">
+          <div class="service-icon">🎨</div>
+          <h3>Graphic Design</h3>
+          <p>Creative posters, logos, flyers and digital designs.</p>
+        </div>
+
+        <div class="service glass">
+          <div class="service-icon">💻</div>
+          <h3>Computer Services</h3>
+          <p>Computer support, software and digital assistance.</p>
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- =========================
+       PROJECTS
+  ========================== -->
+
+  <section id="projects">
+
+    <div class="container">
+
+      <div class="section-title">
+        <span>My Work</span>
+        <h2>Featured Projects</h2>
+        <p>Some of the work and digital solutions I create.</p>
+      </div>
+
+      <div class="filters">
+
+        <button class="filter active" data-filter="all">
+          All
+        </button>
+
+        <button class="filter" data-filter="web">
+          Websites
+        </button>
+
+        <button class="filter" data-filter="app">
+          Applications
+        </button>
+
+        <button class="filter" data-filter="design">
+          Design
+        </button>
+
+      </div>
+
+      <div class="projects">
+
+        <div class="project glass" data-category="web">
+
+          <div class="project-image">
+            🌐
+          </div>
+
+          <div class="project-info">
+
+            <h3>Business Website</h3>
+
+            <p>
+              A modern responsive website created for a local business.
+            </p>
+
+            <span class="tag">HTML</span>
+            <span class="tag">CSS</span>
+            <span class="tag">JavaScript</span>
+
+          </div>
+
+        </div>
+
+        <div class="project glass" data-category="app">
+
+          <div class="project-image">
+            📊
+          </div>
+
+          <div class="project-info">
+
+            <h3>Cyber Café System</h3>
+
+            <p>
+              A digital management system for managing cyber café services.
+            </p>
+
+            <span class="tag">JavaScript</span>
+            <span class="tag">PHP</span>
+
+          </div>
+
+        </div>
+
+        <div class="project glass" data-category="design">
+
+          <div class="project-image">
+            🎨
+          </div>
+
+          <div class="project-info">
+
+            <h3>Graphic Design</h3>
+
+            <p>
+              Creative promotional artwork and branding design.
+            </p>
+
+            <span class="tag">Photoshop</span>
+            <span class="tag">Design</span>
+
+          </div>
+
+        </div>
+
+        <div class="project glass" data-category="web">
+
+          <div class="project-image">
+            💻
+          </div>
+
+          <div class="project-info">
+
+            <h3>Portfolio Website</h3>
+
+            <p>
+              A professional portfolio website for showcasing projects.
+            </p>
+
+            <span class="tag">HTML</span>
+            <span class="tag">CSS</span>
+
+          </div>
+
+        </div>
+
+        <div class="project glass" data-category="app">
+
+          <div class="project-image">
+            📱
+          </div>
+
+          <div class="project-info">
+
+            <h3>Online Booking App</h3>
+
+            <p>
+              A simple application for customers to make bookings online.
+            </p>
+
+            <span class="tag">JavaScript</span>
+            <span class="tag">Database</span>
+
+          </div>
+
+        </div>
+
+        <div class="project glass" data-category="design">
+
+          <div class="project-image">
+            ✨
+          </div>
+
+          <div class="project-info">
+
+            <h3>Brand Identity</h3>
+
+            <p>
+              A colorful digital identity created for a technology brand.
+            </p>
+
+            <span class="tag">Branding</span>
+            <span class="tag">Design</span>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- =========================
+       SKILLS
+  ========================== -->
+
+  <section id="skills">
+
+    <div class="container">
+
+      <div class="section-title">
+        <span>My Abilities</span>
+        <h2>My Skills</h2>
+        <p>Technology and creative skills.</p>
+      </div>
+
+      <div class="skills glass" style="padding:35px;">
+
+        <div class="skill">
+          <div class="skill-head">
+            <span>HTML / CSS</span>
+            <span>95%</span>
+          </div>
+          <div class="bar">
+            <span data-width="95%"></span>
+          </div>
+        </div>
+
+        <div class="skill">
+          <div class="skill-head">
+            <span>JavaScript</span>
+            <span>85%</span>
+          </div>
+          <div class="bar">
+            <span data-width="85%"></span>
+          </div>
+        </div>
+
+        <div class="skill">
+          <div class="skill-head">
+            <span>Graphic Design</span>
+            <span>90%</span>
+          </div>
+          <div class="bar">
+            <span data-width="90%"></span>
+          </div>
+        </div>
+
+        <div class="skill">
+          <div class="skill-head">
+            <span>Web Development</span>
+            <span>90%</span>
+          </div>
+          <div class="bar">
+            <span data-width="90%"></span>
+          </div>
+        </div>
+
+        <div class="skill">
+          <div class="skill-head">
+            <span>Computer Services</span>
+            <span>95%</span>
+          </div>
+          <div class="bar">
+            <span data-width="95%"></span>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- =========================
+       CONTACT
+  ========================== -->
+
+  <section id="contact">
+
+    <div class="container">
+
+      <div class="section-title">
+        <span>Get In Touch</span>
+        <h2>Contact Me</h2>
+        <p>Let's work together.</p>
+      </div>
+
+      <div class="contact-grid">
+
+        <div class="contact-info glass">
+
+          <h3>Let's Connect 🚀</h3>
+
+          <div class="contact-item">
+            <div class="icon">📞</div>
+            <div>
+              <strong>Phone</strong>
+              <p>+254712938967</p>
+            </div>
+          </div>
+
+          <div class="contact-item">
+            <div class="icon">📧</div>
+            <div>
+              <strong>Email</strong>
+              <p>monicagichana@gmail.com</p>
+            </div>
+          </div>
+
+          <div class="contact-item">
+            <div class="icon">📍</div>
+            <div>
+              <strong>Location</strong>
+              <p>Your Location, kisumu</p>
+            </div>
+          </div>
+
+          <div class="contact-item">
+            <div class="icon">🕐</div>
+            <div>
+              <strong>Opening Hours</strong>
+              <p>Monday - Saturday</p>
+            </div>
+          </div>
+
+        </div>
+
+        <form class="contact-form glass" id="contactForm">
+
+          <input
+            type="text"
+            placeholder="Your Name"
+            required
+          >
+
+          <input
+            type="email"
+            placeholder="Your Email"
+            required
+          >
+
+          <input
+            type="tel"
+            placeholder="Phone Number"
+          >
+
+          <textarea
+            placeholder="Write your message..."
+            required
+          ></textarea>
+
+          <button class="btn primary" type="submit">
+            Send Message 🚀
+          </button>
+
+        </form>
+
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- =========================
+       WHATSAPP
+       CHANGE NUMBER BELOW
+  ========================== -->
+
+  <a
+    class="whatsapp"
+    href="https://wa.me/254712938967"
+    target="_blank"
+    title="Chat on WhatsApp"
+  >
+    ☎
+  </a>
+
+  <!-- =========================
+       FOOTER
+  ========================== -->
+
+  <footer>
+
+    <div class="container">
+
+      <div class="logo">
+        <span>GICHA</span>CYBER
+      </div>
+
+      <p>
+        Digital Services • Technology • Creativity
+      </p>
+
+      <p>
+        © 2026 CyberTech Café. All Rights Reserved.
+      </p>
+
+    </div>
+
+  </footer>
+
+  <!-- =========================
+       JAVASCRIPT
+  ========================== -->
+
+  <script>
+
+    /* MOBILE MENU */
+
+    const menuBtn = document.getElementById("menuBtn");
+    const navLinks = document.getElementById("navLinks");
+
+    menuBtn.addEventListener("click", () => {
+      navLinks.classList.toggle("active");
+    });
+
+    document.querySelectorAll(".nav-links a").forEach(link => {
+      link.addEventListener("click", () => {
+        navLinks.classList.remove("active");
+      });
+    });
+
+
+    /* NAVBAR SCROLL */
+
+    const header = document.getElementById("header");
+
+    window.addEventListener("scroll", () => {
+
+      if (window.scrollY > 50) {
+        header.classList.add("scrolled");
+      } else {
+        header.classList.remove("scrolled");
+      }
+
+    });
+
+
+    /* PARTICLES */
+
+    const particleContainer =
+      document.getElementById("particles");
+
+    for (let i = 0; i < 70; i++) {
+
+      const particle = document.createElement("span");
+
+      particle.style.position = "absolute";
+      particle.style.width = Math.random() * 3 + 1 + "px";
+      particle.style.height = particle.style.width;
+      particle.style.borderRadius = "50%";
+      particle.style.background =
+        Math.random() > .5 ? "#00eaff" : "#9b5cff";
+      particle.style.left =
+        Math.random() * 100 + "%";
+      particle.style.top =
+        Math.random() * 100 + "%";
+      particle.style.boxShadow =
+        "0 0 10px currentColor";
+
+      particle.animate(
+        [
+          {
+            transform: "translateY(0)",
+            opacity: .2
+          },
+          {
+            transform:
+              `translateY(-${50 + Math.random()*150}px)`,
+            opacity: 1
+          },
+          {
+            transform: "translateY(0)",
+            opacity: .2
+          }
+        ],
+        {
+          duration:
+            4000 + Math.random() * 6000,
+          iterations: Infinity,
+          delay:
+            Math.random() * -5000
+        }
+      );
+
+      particleContainer.appendChild(particle);
+    }
+
+
+    /* PROJECT FILTER */
+
+    const filters =
+      document.querySelectorAll(".filter");
+
+    const projects =
+      document.querySelectorAll(".project");
+
+    filters.forEach(filter => {
+
+      filter.addEventListener("click", () => {
+
+        filters.forEach(btn =>
+          btn.classList.remove("active")
+        );
+
+        filter.classList.add("active");
+
+        const category =
+          filter.dataset.filter;
+
+        projects.forEach(project => {
+
+          if (
+            category === "all" ||
+            project.dataset.category === category
+          ) {
+            project.style.display = "block";
+          } else {
+            project.style.display = "none";
+          }
+
+        });
+
+      });
+
+    });
+
+
+    /* COUNTERS */
+
+    const counters =
+      document.querySelectorAll("[data-count]");
+
+    const counterObserver =
+      new IntersectionObserver(entries => {
+
+        entries.forEach(entry => {
+
+          if (entry.isIntersecting) {
+
+            const counter = entry.target;
+            const target =
+              Number(counter.dataset.count);
+
+            let current = 0;
+
+            const update = () => {
+
+              const increment =
+                Math.max(1, Math.ceil(target / 50));
+
+              current += increment;
+
+              if (current >= target) {
+                counter.textContent = target + "+";
+                return;
+              }
+
+              counter.textContent = current;
+
+              requestAnimationFrame(update);
+            };
+
+            update();
+
+            counterObserver.unobserve(counter);
+          }
+
+        });
+
+      });
+
+    counters.forEach(counter =>
+      counterObserver.observe(counter)
+    );
+
+
+    /* SKILL BARS */
+
+    const skillBars =
+      document.querySelectorAll(".bar span");
+
+    const skillObserver =
+      new IntersectionObserver(entries => {
+
+        entries.forEach(entry => {
+
+          if (entry.isIntersecting) {
+
+            const bar = entry.target;
+
+            bar.style.width =
+              bar.dataset.width;
+
+            skillObserver.unobserve(bar);
+          }
+
+        });
+
+      });
+
+    skillBars.forEach(bar =>
+      skillObserver.observe(bar)
+    );
+
+
+    /* CONTACT FORM */
+
+    document
+      .getElementById("contactForm")
+      .addEventListener("submit", function(e) {
+
+        e.preventDefault();
+
+        alert(
+          "Thank you! Your message has been received."
+        );
+
+        this.reset();
+
+      });
+
+  </script>
+
+</body>
+</html>
